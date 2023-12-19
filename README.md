@@ -16,6 +16,7 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 ### Directory Structure ###
+```
 .
 ├── assets/
 │   ├── icons
@@ -45,3 +46,4 @@ samples, guidance on mobile development, and a full API reference.
     │       ├── login_textbox : 회원가입 입력 폼
     │       └── terms       : 이용약관 텍스트 입력
     └── main.dart
+```
