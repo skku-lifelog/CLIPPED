@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifelog/widgets/home/clipline.dart'; //클립라인 가져오기
+import 'package:lifelog/screens/detailpaper.dart';
 
 class PaperWidget extends StatelessWidget {
   const PaperWidget({super.key});
@@ -23,8 +24,7 @@ class PaperWidget extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
@@ -44,8 +44,7 @@ class PaperWidget extends StatelessWidget {
                     width: 5,
                   ),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
@@ -97,12 +96,22 @@ class PaperWidget extends StatelessWidget {
               ),
             ],
           ),
-          const Positioned(
-            right: 0,
-            child: Icon(
-              Icons.open_in_full,
-              size: 15,
-              color: Colors.white,
+          Positioned(
+            top: -15,
+            right: -15,
+            child: IconButton(
+              icon: const Icon(
+                Icons.open_in_full,
+                size: 15,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                // 버튼이 클릭되었을 때 실행될 코드
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DetailPaper()),
+                );
+              },
             ),
           ),
           Positioned(
