@@ -4,8 +4,8 @@ import 'package:lifelog/screens/login/login_membership2.dart';
 import 'package:lifelog/screens/login/login_screen.dart';
 import 'package:lifelog/screens/login/login_member.dart';
 import 'package:lifelog/screens/home.dart';
+import 'package:lifelog/screens/publish/publish_paper.dart';
 import 'package:lifelog/screens/mypage/clipedit.dart';
-import 'package:lifelog/screens/mypage/clipmain.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ClipEdit(),
+      home: Publishpaper(),
     );
   }
 }
