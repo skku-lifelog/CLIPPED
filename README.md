@@ -48,15 +48,15 @@ samples, guidance on mobile development, and a full API reference.
     │   │   └── tagbubble          : 클립만드는 도구(색, 태그명)
     │   │
     │   ├── home/
-    │   │   ├── clip        : 메인페이지 추천클립 위젯
-    │   │   ├── clipline    : 상단 클릅라인 위젯
-    │   │   ├── findlinker  : 추천 링커 위젯
-    │   │   └── paper       : 메인페이지 게시글(페이퍼) 위젯
+    │   │   ├── clip                : 메인페이지 추천클립 위젯
+    │   │   ├── clipline            : 상단 클릅라인 위젯
+    │   │   ├── findlinker          : 추천 링커 위젯
+    │   │   └── paper               : 메인페이지 게시글(페이퍼) 위젯
     │   │
     │   └── login/
-    │       ├── checkbox    : 회원가입 체크박스
-    │       ├── login_box   : 회원가입 이동 버튼
-    │       ├── login_textbox : 회원가입 입력 폼
-    │       └── terms       : 이용약관 텍스트 입력
+    │       ├── checkbox            : 회원가입 체크박스
+    │       ├── login_box           : 회원가입 이동 버튼
+    │       ├── login_textbox       : 회원가입 입력 폼
+    │       └── terms               : 이용약관 텍스트 입력
     └── main.dart
 ```
