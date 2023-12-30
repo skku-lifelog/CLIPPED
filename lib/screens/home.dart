@@ -54,28 +54,55 @@ class _HomePageState extends State<HomePage> {
         scrollDirection: Axis.vertical,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(
+                  height: 10,
+                ),
                 const Text(
-                  "클립라인 업데이트",
+                  "라이프로그 업데이트",
                   style: TextStyle(
                     fontSize: 13,
                   ),
                 ),
-                ClipLine(
-                  image: Image.asset("assets/profile.png"),
-                  name: "김빵빵",
-                  university: "성균관대",
-                  major: "소프트웨어",
-                  onTap: () {},
-                  width: 220,
-                  height: 70,
-                  icon: const Icon(
-                    Icons.north_east,
-                    color: Colors.white,
-                    size: 17,
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      children: [
+                        ClipLine(
+                          image: Image.asset("assets/profile.png"),
+                          name: "김빵빵",
+                          university: "성균관대",
+                          major: "소프트웨어",
+                          onTap: () {},
+                          width: 220,
+                          height: 70,
+                          icon: const Icon(
+                            Icons.north_east,
+                            color: Colors.white,
+                            size: 17,
+                          ),
+                        ),
+                        ClipLine(
+                          image: Image.asset("assets/profile.png"),
+                          name: "김빵빵",
+                          university: "성균관대",
+                          major: "소프트웨어",
+                          onTap: () {},
+                          width: 220,
+                          height: 70,
+                          icon: const Icon(
+                            Icons.north_east,
+                            color: Colors.white,
+                            size: 17,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const Text(
@@ -84,16 +111,62 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 13,
                   ),
                 ),
-                const PaperWidget(),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Row(
+                      children: [
+                        const PaperWidget(),
+                        SizedBox(
+                          width: 17,
+                        ),
+                        const PaperWidget(),
+                      ],
+                    ),
+                  ),
+                ),
                 const Text(
-                  "새로운 (링커) 찾기",
+                  "새로운 팔로워 찾기",
                   style: TextStyle(
                     fontSize: 13,
                   ),
                 ),
-                const LinkerWidget(),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    child: Row(
+                      children: [
+                        const LinkerWidget(),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        const LinkerWidget(),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        const LinkerWidget(),
+                      ],
+                    ),
+                  ),
+                ),
                 const Text("추천 클립"),
-                const ClipWidget()
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    child: Row(
+                      children: [
+                        const ClipWidget(),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        ClipWidget(),
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
           ),

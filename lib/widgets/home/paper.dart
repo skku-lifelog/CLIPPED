@@ -7,6 +7,100 @@ class PaperWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void handlePopupMenuSelection(String value) {
+      switch (value) {
+        case 'share':
+          // Handle share
+          break;
+        case 'send':
+          // Handle send
+          break;
+        case 'hide':
+          // Handle hide
+          break;
+      }
+    }
+
+    void showPopupMenu(BuildContext context) {
+      final RenderBox renderBox = context.findRenderObject() as RenderBox;
+      final Offset offset = renderBox.localToGlobal(Offset.zero);
+      showMenu(
+        context: context,
+        color: const Color.fromRGBO(115, 115, 115, 0.9),
+        position: RelativeRect.fromLTRB(
+          offset.dx + 110,
+          offset.dy + renderBox.size.height - 230,
+          offset.dx + renderBox.size.width + 110,
+          offset.dy + renderBox.size.height - 340, // Adjust as needed
+        ),
+        items: [
+          PopupMenuItem(
+            value: 'share',
+            child: Row(
+              children: [
+                Icon(
+                  Icons.share,
+                  size: 12,
+                  color: Colors.white,
+                ),
+                SizedBox(width: 5),
+                Text(
+                  "프로필 공유",
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          PopupMenuItem(
+            value: 'send',
+            child: Row(
+              children: [
+                Icon(
+                  Icons.send,
+                  size: 12,
+                  color: Colors.white,
+                ),
+                SizedBox(width: 5),
+                Text(
+                  "메세지 보내기",
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          PopupMenuItem(
+              value: 'hide',
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.visibility_off,
+                    size: 12,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    "컨텐츠 숨기기",
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              )),
+        ],
+      ).then((value) {
+        if (value != null) {
+          handlePopupMenuSelection(value);
+        }
+      });
+    }
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(18),
       child: Container(
@@ -121,7 +215,9 @@ class PaperWidget extends StatelessWidget {
               name: "김빵빵",
               university: "성균관대",
               major: "소프트웨어",
-              onTap: () {},
+              onTap: () {
+                showPopupMenu(context);
+              },
               width: 210,
               height: 55,
               icon: const Icon(

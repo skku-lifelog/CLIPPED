@@ -11,9 +11,130 @@ class DetailPaper extends StatefulWidget {
 
 class _DetailPaperState extends State<DetailPaper> {
   bool isEmpty = true; // bottom modal test용
+  bool isFavorite = false; // 좋아요 눌렀는지
+  int count = 112; // 좋아요 눌려져 있던 수
+  List<ListTile> comments = []; // 유저 아이디와 댓글 내용을 저장하는 리스트
+
+  TextEditingController commentController = new TextEditingController();
+  bool atfirst = true;
+
+  // 존재하는 코멘트 넣어주기
+  void initializeComments() {
+    atfirst = false;
+    comments.add(ListTile(
+      horizontalTitleGap: 0,
+      leading: ClipOval(
+        child: Image.asset(
+          "assets/profile.png",
+          width: 35,
+          height: 35,
+        ),
+      ),
+      title: const Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "송연우",
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(" @nameid",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                      ))
+                ],
+              ),
+              Text(
+                "성균관대 • 소프트웨어",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 9,
+                ),
+              )
+            ],
+          ),
+          SizedBox(width: 10),
+          Text("우와~해커톤 멋있습니다.",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+              ))
+        ],
+      ),
+      tileColor: const Color.fromRGBO(115, 115, 115, 0.7),
+      onTap: () {
+        // Handle option 1
+        Navigator.pop(context); // Close the modal
+      },
+    ));
+    comments.add(ListTile(
+      horizontalTitleGap: 0,
+      leading: ClipOval(
+        child: Image.asset(
+          "assets/profile.png",
+          width: 35,
+          height: 35,
+        ),
+      ),
+      title: const Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "장하현",
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(" @nameid",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                      ))
+                ],
+              ),
+              Text(
+                "성균관대 • 소프트웨어",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 9,
+                ),
+              )
+            ],
+          ),
+          SizedBox(width: 10),
+          Text("저도 참여해보고 싶네요",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+              ))
+        ],
+      ),
+      tileColor: const Color.fromRGBO(115, 115, 115, 0.7),
+      onTap: () {
+        // Handle option 1
+        Navigator.pop(context); // Close the modal
+      },
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (atfirst) initializeComments();
+
     return Material(
       color: const Color.fromRGBO(241, 241, 241, 1),
       child: Scaffold(
@@ -225,13 +346,16 @@ class _DetailPaperState extends State<DetailPaper> {
                                     TagBubble(
                                       keyword: "우아한형제들",
                                       type: -1,
-                                      color: Colors.black,
+                                      color: Colors.grey,
                                       onPressed: () {},
+                                    ),
+                                    SizedBox(
+                                      width: 5,
                                     ),
                                     TagBubble(
                                       keyword: "컴공",
                                       type: -1,
-                                      color: Colors.black,
+                                      color: Colors.grey,
                                       onPressed: () {},
                                     ),
                                   ],
@@ -282,7 +406,7 @@ class _DetailPaperState extends State<DetailPaper> {
                                                         Container(
                                                           height: 30,
                                                         ),
-                                                        const Row(
+                                                        Row(
                                                           children: [
                                                             SizedBox(width: 4),
                                                             Icon(
@@ -291,7 +415,7 @@ class _DetailPaperState extends State<DetailPaper> {
                                                               color: Colors.white,
                                                             ),
                                                             SizedBox(width: 2),
-                                                            Text("3",
+                                                            Text(comments.length.toString(),
                                                                 style: TextStyle(
                                                                   fontSize: 12,
                                                                   color: Colors.white,
@@ -320,6 +444,7 @@ class _DetailPaperState extends State<DetailPaper> {
                                                                   vertical: 8,
                                                                 ),
                                                                 child: TextField(
+                                                                  controller: commentController,
                                                                   style: const TextStyle(color: Colors.white),
                                                                   decoration: InputDecoration(
                                                                     hintText: "댓글 작성",
@@ -338,7 +463,144 @@ class _DetailPaperState extends State<DetailPaper> {
                                                               ),
                                                             ),
                                                             TextButton(
-                                                              onPressed: () {},
+                                                              onPressed: () {
+                                                                if (commentController.text.isNotEmpty) {
+                                                                  setState(() {
+                                                                    // Add a ListTile with the content of the commentTextController to the comments list
+                                                                    comments.add(ListTile(
+                                                                      horizontalTitleGap: 0,
+                                                                      leading: ClipOval(
+                                                                        child: Image.asset(
+                                                                          "assets/profile.png",
+                                                                          width: 35,
+                                                                          height: 35,
+                                                                        ),
+                                                                      ),
+                                                                      title: Row(
+                                                                        children: [
+                                                                          Column(
+                                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              Row(
+                                                                                children: [
+                                                                                  Text(
+                                                                                    "박제현",
+                                                                                    style: TextStyle(
+                                                                                      fontSize: 11,
+                                                                                      color: Colors.white,
+                                                                                      fontWeight: FontWeight.bold,
+                                                                                    ),
+                                                                                  ),
+                                                                                  Text(" @jh_park",
+                                                                                      style: TextStyle(
+                                                                                        color: Colors.white,
+                                                                                        fontSize: 11,
+                                                                                      ))
+                                                                                ],
+                                                                              ),
+                                                                              Text(
+                                                                                "성균관대 • 소프트웨어",
+                                                                                style: TextStyle(
+                                                                                  color: Colors.white,
+                                                                                  fontSize: 9,
+                                                                                ),
+                                                                              )
+                                                                            ],
+                                                                          ),
+                                                                          SizedBox(width: 10),
+                                                                          Text(commentController.text,
+                                                                              style: TextStyle(
+                                                                                color: Colors.white,
+                                                                                fontSize: 12,
+                                                                              ))
+                                                                        ],
+                                                                      ),
+                                                                      trailing: Theme(
+                                                                        data: Theme.of(context).copyWith(
+                                                                          cardColor: const Color.fromRGBO(115, 115, 115, 0.9),
+                                                                        ),
+                                                                        child: PopupMenuButton(
+                                                                          itemBuilder: (context) {
+                                                                            return [
+                                                                              const PopupMenuItem(
+                                                                                  value: 'edit',
+                                                                                  child: Row(
+                                                                                    children: [
+                                                                                      Icon(
+                                                                                        Icons.edit,
+                                                                                        size: 12,
+                                                                                        color: Colors.white,
+                                                                                      ),
+                                                                                      SizedBox(width: 5),
+                                                                                      Text("수정",
+                                                                                          style: TextStyle(
+                                                                                            fontSize: 10,
+                                                                                            color: Colors.white,
+                                                                                          ))
+                                                                                    ],
+                                                                                  )),
+                                                                              const PopupMenuItem(
+                                                                                  value: 'erase',
+                                                                                  child: Row(
+                                                                                    children: [
+                                                                                      Icon(
+                                                                                        Icons.delete_outline,
+                                                                                        size: 12,
+                                                                                        color: Colors.white,
+                                                                                      ),
+                                                                                      SizedBox(width: 5),
+                                                                                      Text("삭제",
+                                                                                          style: TextStyle(
+                                                                                            fontSize: 10,
+                                                                                            color: Colors.white,
+                                                                                          ))
+                                                                                    ],
+                                                                                  )),
+                                                                            ];
+                                                                          },
+                                                                          offset: const Offset(-10, 20),
+                                                                          onSelected: (value) {
+                                                                            switch (value) {
+                                                                              case 'edit':
+                                                                                setState(() {
+                                                                                  // 수정하기
+                                                                                });
+                                                                                break;
+                                                                              case 'erase':
+                                                                                setState(() {
+                                                                                  //지우기
+                                                                                });
+                                                                                break;
+                                                                            }
+                                                                          },
+                                                                          shape: RoundedRectangleBorder(
+                                                                            borderRadius: BorderRadius.circular(7),
+                                                                          ),
+                                                                          child: const SizedBox(
+                                                                            width: 20,
+                                                                            height: 20,
+                                                                            child: Icon(
+                                                                              Icons.more_vert,
+                                                                              size: 17,
+                                                                              color: Colors.white,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                      tileColor: const Color.fromRGBO(115, 115, 115, 0.7),
+                                                                      onTap: () {
+                                                                        // Handle option 1
+                                                                        Navigator.pop(context); // Close the modal
+                                                                      },
+                                                                    ));
+                                                                  });
+
+                                                                  // Clear the text in the commentTextController
+                                                                  commentController.clear();
+                                                                }
+
+                                                                setState(() {});
+                                                              },
                                                               style: ButtonStyle(
                                                                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                                                   RoundedRectangleBorder(
@@ -363,186 +625,45 @@ class _DetailPaperState extends State<DetailPaper> {
                                                       ],
                                                     ),
                                                   )));
-                                              modalContent.add(ListTile(
-                                                horizontalTitleGap: 0,
-                                                leading: ClipOval(
-                                                  child: Image.asset(
-                                                    "assets/profile.png",
-                                                    width: 35,
-                                                    height: 35,
-                                                  ),
-                                                ),
-                                                title: const Row(
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              "송연우",
-                                                              style: TextStyle(
-                                                                fontSize: 11,
-                                                                color: Colors.white,
-                                                                fontWeight: FontWeight.bold,
-                                                              ),
-                                                            ),
-                                                            Text(" @nameid",
-                                                                style: TextStyle(
-                                                                  color: Colors.white,
-                                                                  fontSize: 11,
-                                                                ))
-                                                          ],
-                                                        ),
-                                                        Text(
-                                                          "성균관대 • 소프트웨어",
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 9,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    SizedBox(width: 10),
-                                                    Text("우와~해커톤 멋있습니다.",
+
+                                              if (comments.isEmpty) {
+                                                modalContent.add(Container(
+                                                  height: 165,
+                                                  width: MediaQuery.of(context).size.width,
+                                                  color: const Color.fromRGBO(115, 115, 115, 0.7),
+                                                  child: Transform.translate(
+                                                    offset: Offset(MediaQuery.of(context).size.width / 2 - 50, 10),
+                                                    child: Text("등록된 댓글이 없습니다.",
                                                         style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 12,
-                                                        ))
-                                                  ],
-                                                ),
-                                                trailing: Theme(
-                                                  data: Theme.of(context).copyWith(
-                                                    cardColor: const Color.fromRGBO(115, 115, 115, 0.9),
+                                                        )),
                                                   ),
-                                                  child: PopupMenuButton(
-                                                    itemBuilder: (context) {
-                                                      return [
-                                                        const PopupMenuItem(
-                                                            value: 'edit',
-                                                            child: Row(
-                                                              children: [
-                                                                Icon(
-                                                                  Icons.edit,
-                                                                  size: 12,
-                                                                  color: Colors.white,
-                                                                ),
-                                                                SizedBox(width: 5),
-                                                                Text("수정",
-                                                                    style: TextStyle(
-                                                                      fontSize: 10,
-                                                                      color: Colors.white,
-                                                                    ))
-                                                              ],
-                                                            )),
-                                                        const PopupMenuItem(
-                                                            value: 'erase',
-                                                            child: Row(
-                                                              children: [
-                                                                Icon(
-                                                                  Icons.delete_outline,
-                                                                  size: 12,
-                                                                  color: Colors.white,
-                                                                ),
-                                                                SizedBox(width: 5),
-                                                                Text("삭제",
-                                                                    style: TextStyle(
-                                                                      fontSize: 10,
-                                                                      color: Colors.white,
-                                                                    ))
-                                                              ],
-                                                            )),
-                                                      ];
-                                                    },
-                                                    offset: const Offset(-10, 20),
-                                                    onSelected: (value) {
-                                                      switch (value) {
-                                                        case 'edit':
-                                                          print('edit');
-                                                          break;
-                                                        case 'erase':
-                                                          print('erase');
-                                                          break;
-                                                      }
-                                                    },
-                                                    shape: RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(7),
-                                                    ),
-                                                    child: const SizedBox(
-                                                      width: 20,
-                                                      height: 20,
-                                                      child: Icon(
-                                                        Icons.more_vert,
-                                                        size: 17,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
+                                                ));
+                                              } else if (comments.length <= 3) {
+                                                modalContent.addAll(comments);
+                                                for (int i = 0; i < 3 - comments.length; i++) {
+                                                  modalContent.add(Container(
+                                                    height: 55,
+                                                    color: const Color.fromRGBO(115, 115, 115, 0.7),
+                                                  ));
+                                                }
+                                              } else {
+                                                modalContent.add(Container(
+                                                  constraints: BoxConstraints(
+                                                    maxHeight: 165.0, // Set your maximum height here
                                                   ),
-                                                ),
-                                                tileColor: const Color.fromRGBO(115, 115, 115, 0.7),
-                                                onTap: () {
-                                                  // Handle option 1
-                                                  Navigator.pop(context); // Close the modal
-                                                },
-                                              ));
-                                              modalContent.add(ListTile(
-                                                horizontalTitleGap: 0,
-                                                leading: ClipOval(
-                                                  child: Image.asset(
-                                                    "assets/profile.png",
-                                                    width: 35,
-                                                    height: 35,
-                                                  ),
-                                                ),
-                                                title: const Row(
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                  child: SingleChildScrollView(
+                                                    child: Column(
                                                       children: [
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              "장하현",
-                                                              style: TextStyle(
-                                                                fontSize: 11,
-                                                                color: Colors.white,
-                                                                fontWeight: FontWeight.bold,
-                                                              ),
-                                                            ),
-                                                            Text(" @nameid",
-                                                                style: TextStyle(
-                                                                  color: Colors.white,
-                                                                  fontSize: 11,
-                                                                ))
-                                                          ],
-                                                        ),
-                                                        Text(
-                                                          "성균관대 • 소프트웨어",
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 9,
-                                                          ),
-                                                        )
+                                                        // Your other widgets...
+                                                        // Assuming comments is a List of ListTile widgets representing comments
+                                                        ...comments,
                                                       ],
                                                     ),
-                                                    SizedBox(width: 10),
-                                                    Text("저도 참여해보고 싶네요",
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 12,
-                                                        ))
-                                                  ],
-                                                ),
-                                                tileColor: const Color.fromRGBO(115, 115, 115, 0.7),
-                                                onTap: () {
-                                                  // Handle option 1
-                                                  Navigator.pop(context); // Close the modal
-                                                },
-                                              ));
-                                              modalContent.add(Container(
-                                                height: 55,
-                                                color: const Color.fromRGBO(115, 115, 115, 0.7),
-                                              ));
+                                                  ),
+                                                ));
+                                              }
                                             }
 
                                             return Container(
@@ -554,7 +675,7 @@ class _DetailPaperState extends State<DetailPaper> {
                                           },
                                         );
                                       },
-                                      child: const Column(
+                                      child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -565,7 +686,7 @@ class _DetailPaperState extends State<DetailPaper> {
                                           ),
                                           SizedBox(width: 8),
                                           Text(
-                                            "3",
+                                            comments.length.toString(),
                                             style: TextStyle(
                                               fontSize: 10,
                                             ),
@@ -589,21 +710,25 @@ class _DetailPaperState extends State<DetailPaper> {
                                         ),
                                       ),
                                       onPressed: () {
-                                        // 버튼이 클릭되었을 때 수행할 동작
+                                        setState(() {
+                                          // 토글
+                                          isFavorite = !isFavorite;
+                                          count += isFavorite ? 1 : -1;
+                                        });
                                       },
-                                      child: const Column(
+                                      child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Icon(
-                                            Icons.favorite,
+                                            isFavorite ? Icons.favorite : Icons.favorite_border,
                                             color: Colors.white,
                                             size: 18,
                                           ),
                                           SizedBox(width: 8),
                                           Text(
-                                            "112",
+                                            count.toString(),
                                             style: TextStyle(
                                               fontSize: 10,
                                             ),

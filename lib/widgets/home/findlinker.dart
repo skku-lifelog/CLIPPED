@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
-
-double radians = math.pi / 180;
+import 'package:lifelog/widgets/clip/tagbubble.dart';
 
 class LinkerWidget extends StatefulWidget {
   const LinkerWidget({
@@ -30,72 +28,68 @@ class _LinkerWidgetState extends State<LinkerWidget> {
             )),
       ),
       Positioned(
-          right: 15,
-          top: 3,
-          child: Transform.rotate(
-            angle: 90 * radians,
-            child: Container(
-              width: 30,
-              height: 45,
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(113, 112, 112, 1),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.attach_file,
-                    color: Colors.white,
-                    size: 18,
-                  ),
-                ],
-              ),
+          right: 10,
+          top: 7,
+          child: Container(
+            width: 35,
+            height: 30,
+            decoration: BoxDecoration(
+              color: const Color.fromRGBO(113, 112, 112, 1),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.person_add_alt_1,
+                  color: Colors.white,
+                  size: 18,
+                ),
+              ],
             ),
           )),
       showELess
           ? Positioned(
               bottom: 0,
               child: Container(
-                  height: 70,
+                  height: 55,
                   width: 180,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.7),
-                      borderRadius: BorderRadius.circular(25)),
+                  decoration: BoxDecoration(color: Colors.grey.withOpacity(0.7), borderRadius: BorderRadius.circular(25)),
                   child: Column(
                     children: [
                       IconButton(
                         iconSize: 25,
+                        padding: EdgeInsets.zero,
+                        constraints: BoxConstraints(),
                         icon: const Icon(
                           Icons.expand_less,
                           color: Colors.white,
                           size: 25,
                         ),
                         onPressed: () {
-                          showELess = false;
+                          setState(() {
+                            showELess = false;
+                          });
                         },
                       ),
-                      Transform.translate(
-                        offset: const Offset(0, -10),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "김빵빵",
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "김빵빵",
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
-                            Text(" @bbangbbang",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 13,
-                                )),
-                          ],
-                        ),
+                          ),
+                          Text(" @bbangbbang",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                              )),
+                        ],
                       )
                     ],
                   )))
@@ -104,66 +98,85 @@ class _LinkerWidgetState extends State<LinkerWidget> {
               child: Container(
                   height: 150,
                   width: 180,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.7),
-                      borderRadius: BorderRadius.circular(25)),
+                  decoration: BoxDecoration(color: Colors.grey.withOpacity(0.7), borderRadius: BorderRadius.circular(25)),
                   child: Column(
                     children: [
-                      IconButton(
-                        iconSize: 25,
-                        icon: const Icon(
-                          Icons.expand_more,
-                          color: Colors.white,
-                          size: 25,
-                        ),
-                        onPressed: () {
-                          showELess = true;
-                        },
-                      ),
-                      Transform.translate(
-                        offset: const Offset(0, -10),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "김빵빵",
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(" @bbangbbang",
-                                style: TextStyle(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Transform.translate(
+                            offset: Offset(10, 0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: IconButton(
+                                iconSize: 25,
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints(),
+                                icon: const Icon(
+                                  Icons.expand_more,
                                   color: Colors.white,
-                                  fontSize: 13,
-                                )),
-                          ],
-                        ),
-                      ),
-                      Transform.translate(
-                        offset: const Offset(0, -10),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "성균관대•소프트웨어학과",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
+                                  size: 30,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    showELess = true;
+                                  });
+                                },
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Transform.translate(
+                            offset: Offset(50, 35),
+                            child: IconButton(
+                                onPressed: () {},
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints(),
+                                icon: Icon(
+                                  size: 20,
+                                  color: Colors.white,
+                                  Icons.north_east,
+                                )),
+                          )
+                        ],
                       ),
-                      Transform.translate(
-                        offset: const Offset(0, -5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "김빵빵",
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(" @bbangbbang",
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.9),
+                                fontSize: 11,
+                              )),
+                        ],
+                      ),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "성균관대•소프트웨어학과",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 3),
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -175,7 +188,7 @@ class _LinkerWidgetState extends State<LinkerWidget> {
                               ),
                             ),
                             Text(
-                              "연결",
+                              "팔로잉",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 10,
@@ -185,7 +198,7 @@ class _LinkerWidgetState extends State<LinkerWidget> {
                         ),
                       ),
                       const Text(
-                        "나와 연결된 사람 3명과 연결중",
+                        "함께 팔로우한 사람 3명",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 10,
@@ -197,44 +210,20 @@ class _LinkerWidgetState extends State<LinkerWidget> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5, vertical: 1),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: Colors.white, // 테두리 색상
-                                width: 1.0, // 테두리 너비
-                              ),
-                            ),
-                            child: const Text(
-                              "#대학생",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                              ),
-                            ),
+                          TagBubble(
+                            keyword: "대학생",
+                            type: -1,
+                            color: Colors.white,
+                            onPressed: () {},
                           ),
                           const SizedBox(
                             width: 5,
                           ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5, vertical: 1),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: Colors.white, // 테두리 색상
-                                width: 1.0, // 테두리 너비
-                              ),
-                            ),
-                            child: const Text(
-                              "#컴공",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                              ),
-                            ),
+                          TagBubble(
+                            keyword: "컴공",
+                            type: -1,
+                            color: Colors.white,
+                            onPressed: () {},
                           ),
                         ],
                       ),
